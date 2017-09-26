@@ -1,14 +1,18 @@
-﻿@{
+﻿<!-- reference to the genre model (Enumerable is a list or collection) -->
+@model IEnumerable<MvcMusicStore.Models.Genre>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Store";
 }
 
-<h2>Store</h2>
+<h2>Browse our Store</h2>
 
 <ul>
-    <li>@Html.ActionLink("Rock", "Browse", "Store", new { genre = "Rock"}, null)</li>
-    <li>@Html.ActionLink("Jazz", "Browse", "Store", new { genre = "Jazz" }, null)</li>
-    <li>@Html.ActionLink("Metal", "Browse", "Store", new { genre = "Metal" }, null)</li>
+    @foreach (var g in Model)
+    {
+        <li>@Html.ActionLink(g.Name, "Browse", "Store", new { genre=g.Name }, null)</li>
+    }
 </ul>
 
 
