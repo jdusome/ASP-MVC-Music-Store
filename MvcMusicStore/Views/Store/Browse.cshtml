@@ -3,5 +3,25 @@
     ViewBag.Title = "Browse";
 }
 
-<h3>Albums for: @ViewBag.genre</h3>
+@model MvcMusicStore.Models.Genre
+
+<h3>Albums for: @Model.Name</h3>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Price</th>
+    </tr>
+
+    @foreach (var a in Model.Albums)
+    {
+        <tr>
+            <td>@a.Title</td>
+            <td>@a.Artist.Name</td>
+            <!-- This will format as a currency with a dollar sign -->
+            <td>@String.Format("{0:c}",a.Price)</td>
+        </tr>
+    }
+</table>
 
