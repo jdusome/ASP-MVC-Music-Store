@@ -5,21 +5,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Albums</h2>
+<h2>
+    @ViewBag.AlbumCount Albums
 
-<p>
+    @if (ViewBag.SearchTerm != null)
+    {
+        <small> - contain the term(s) "@ViewBag.SearchTerm"</small>
+    }
+</h2>
+
+
+
+<section class="col-md-3">
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-striped table-hover">
+</section>
+<section class="col-md-9 text-right">
+    @using (Html.BeginForm())
+    {
+        //this method is used to prevent cross site scripting
+        @Html.AntiForgeryToken()
+        <input name="Title" id="Title" placeholder="Enter Album Title" required />
+        <button class="btn btn-default">Search</button>
+    }
+</section>
+
+<table class="table table-striped table-hover sortable">
     <tr>
         <th>
             Artist
         </th>
         <th>
-            Genre
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Genre
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -35,10 +54,10 @@
             @Html.DisplayFor(modelItem => item.Artist.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Genre.Name)
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(modelItem => item.Genre.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)

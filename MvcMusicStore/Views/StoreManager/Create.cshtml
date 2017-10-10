@@ -8,7 +8,8 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+<!-- Because we are uploading a file, we need to allow encoding data -->
+@using (Html.BeginForm("Create", "StoreManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -17,7 +18,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.GenreId, "GenreId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GenreId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("GenreId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GenreId, "", new { @class = "text-danger" })
@@ -25,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ArtistId, "ArtistId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ArtistId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ArtistId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ArtistId, "", new { @class = "text-danger" })
@@ -51,8 +52,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AlbumArtUrl, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AlbumArtUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AlbumArtUrl, "", new { @class = "text-danger" })
+                <!-- It is important that then name of the input matches the database Model property name exactly -->
+                <input type="file" name="AlbumArtUrl" />
             </div>
         </div>
 
