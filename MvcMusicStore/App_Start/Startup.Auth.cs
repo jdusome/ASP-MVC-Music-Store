@@ -7,6 +7,9 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using MvcMusicStore.Models;
 
+//add a reference so we can read keys from web.config
+using System.Configuration;
+
 namespace MvcMusicStore
 {
     public partial class Startup
@@ -58,11 +61,11 @@ namespace MvcMusicStore
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = System.Configuration.ConfigurationManager.AppSettings["GoogleClientId"],
+                ClientSecret = System.Configuration.ConfigurationManager.AppSettings["GoogleClientSecret"]
+            });
         }
     }
 }
