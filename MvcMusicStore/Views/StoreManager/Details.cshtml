@@ -53,7 +53,13 @@
 
     </dl>
 </div>
+
+
+@if (User.IsInRole("Administrator")){ //Only show links if the user is an admin
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+}

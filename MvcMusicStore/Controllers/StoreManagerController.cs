@@ -10,10 +10,11 @@ using MvcMusicStore.Models;
 
 namespace MvcMusicStore.Controllers
 {
+
+    [Authorize(Roles = "Administrator")] //Authorize will make sure users that are not logged in cannot be accessed unless logged in. Roles specfies which user roles can enter.
     public class StoreManagerController : Controller
     {
         private MusicStoreModel db = new MusicStoreModel();
-
         // GET: StoreManager
         public ActionResult Index()
         {
@@ -40,6 +41,7 @@ namespace MvcMusicStore.Controllers
         }
 
         // GET: StoreManager/Details/5
+        [AllowAnonymous] //This allows anonymous users to access just this one
         public ActionResult Details(int? id)
         {
             if (id == null)

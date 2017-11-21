@@ -8,6 +8,9 @@ namespace MvcMusicStore
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+
+            //Force SSL
+            filters.Add(new RequireHttpsAttribute());
         }
     }
 }
