@@ -79,6 +79,7 @@ namespace MvcMusicStore.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    Session["CartId"] = null; //reset cartId
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -392,6 +393,7 @@ namespace MvcMusicStore.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["CartId"] = null; //reset cartId
             return RedirectToAction("Index", "Home");
         }
 

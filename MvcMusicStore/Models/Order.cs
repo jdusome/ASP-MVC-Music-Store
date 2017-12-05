@@ -17,14 +17,17 @@ namespace MvcMusicStore.Models
 
         public int OrderId { get; set; }
 
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
 
         [StringLength(256)]
         public string Username { get; set; }
 
+        [Display(Name = "First Name")]
         [StringLength(160)]
         public string FirstName { get; set; }
 
+        [Display(Name = "Last Name")]
         [StringLength(160)]
         public string LastName { get; set; }
 
@@ -37,6 +40,7 @@ namespace MvcMusicStore.Models
         [StringLength(40)]
         public string State { get; set; }
 
+        [Display(Name = "Postal Code")]
         [StringLength(10)]
         public string PostalCode { get; set; }
 

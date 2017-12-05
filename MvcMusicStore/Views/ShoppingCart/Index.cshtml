@@ -1,0 +1,41 @@
+﻿@model MvcMusicStore.Models.ShoppingCartViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Shopping Cart</h2>
+
+@if (Model.CartItems.Count == 0)
+{
+    <h3 class="alert-info">Your cart is empty! Please use the Store link above to start shopping.</h3>
+}
+
+else
+{
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Album</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var item in Model.CartItems)
+        {
+            <tr>
+                <td>@item.Album.Title</td>
+                <td>@String.Format("{0:c}", item.Album.Price)</td>
+                <td>@item.Count</td>
+                <td>@Html.ActionLink("Remove", "RemoveFromCart", "ShoppingCart", new { Id = item.AlbumId }, null)</td>
+            </tr>
+        }
+        <tr>
+            <td><b>Total</b></td>
+            <td>@String.Format("{0:c}", Model.CartTotal)</td>
+            <td></td>
+            <td>@Html.ActionLink("Checkout >>", "Checkout", "ShoppingCart")</td>
+        </tr>
+    </table>
+}
+

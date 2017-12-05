@@ -12,6 +12,7 @@
         <th>Title</th>
         <th>Artist</th>
         <th>Price</th>
+        <th>Add to Cart</th>
     </tr>
 
     @foreach (var a in Model.Albums)
@@ -21,6 +22,8 @@
             <td>@a.Artist.Name</td>
             <!-- This will format as a currency with a dollar sign -->
             <td>@String.Format("{0:c}",a.Price)</td>
+            <!-- This will call the AddToCart method within the ShoppingCart controller, passes albumId -->
+            <td>@Html.ActionLink("Add To Cart", "AddToCart", "ShoppingCart", new { Id = a.AlbumId}, null)</td>
         </tr>
     }
 </table>
